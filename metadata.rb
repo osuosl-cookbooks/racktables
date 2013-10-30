@@ -1,5 +1,5 @@
 name             'racktables'
-maintainer       'OSU Open Source Lab'
+maintainer       'Oregon State University'
 maintainer_email 'bramwelt@osuosl.org'
 license          'Apache 2.0'
 description      'Manages deploying Racktables: the datacenter asset manager'
