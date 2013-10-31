@@ -10,5 +10,8 @@ recipe 'racktables::default', 'Install from source, and setup web app'
 recipe 'racktables::server', 'Setup the racktables web appliction using apache'
 recipe 'racktables::source', 'Install racktables for source tarball'
 recipe 'racktables::application', 'Configure the racktables application'
+recipe 'racktables::database', 'Setup the database for Racktables'
 
 depends 'apache2'
+depends 'database'
+depends 'mysql'
