@@ -19,7 +19,7 @@
 include_recipe "database::mysql"
 
 mysql_connection_info = {
-    :host => '10.0.2.15',
+    :host => node['racktables']['db']['host'],
     :username => 'root',
     :password => node['mysql']['server_root_password']
 }
@@ -33,6 +33,6 @@ mysql_database_user node['racktables']['db']['user'] do
     connection mysql_connection_info
     password node['racktables']['db']['password']
     database_name node['racktables']['db']['name']
-    privilages [:all]
+    privileges [:all]
     action [:create, :grant]
 end

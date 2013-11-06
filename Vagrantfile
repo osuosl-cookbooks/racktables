@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "racktables-berkshelf"
+  config.vm.hostname = "racktables-vagrant"
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "centos-6-20131003"
@@ -82,6 +82,7 @@ Vagrant.configure("2") do |config|
         :redirect_http => false
       },
       :mysql => {
+        :bind_address => '0.0.0.0',
         :server_root_password => 'rootpass',
         :server_debian_password => 'debpass',
         :server_repl_password => 'replpass'
@@ -89,6 +90,7 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
+        "recipe[mysql::server]",
         "recipe[racktables::default]"
     ]
   end
