@@ -15,3 +15,5 @@ default['racktables']['db']['name'] = "racktables_db"
 default['racktables']['db']['user'] = "racktables_user"
 default['racktables']['db']['host'] = "localhost"
 default['racktables']['db']['password'] = "password"
+
+default['racktables']['admin']['password'] = "password123"

@@ -23,6 +23,8 @@ mysql_connection_info = {
     :username => 'root',
     :password => node['mysql']['server_root_password']
 }
+create_tables_sql = "#{Chef::Config['file_cache_path']}/racktables_db.sql"
+create_admin_sql = "#{Chef::Config['file_cache_path']}/racktables_admin.sql"
 
 mysql_database node['racktables']['db']['name'] do
     connection mysql_connection_info
@@ -35,4 +37,30 @@ mysql_database_user node['racktables']['db']['user'] do
     database_name node['racktables']['db']['name']
     privileges [:all]
     action [:create, :grant]
+end
+
+cookbook_file "racktables_db.sql" do
+    path create_tables_sql
+    backup false
+    action :create
+end
+
+mysql_database "create racktables db tables" do
+    connection mysql_connection_info
+    database_name node['racktables']['db']['name']
+    sql { ::File.open(create_tables_sql).read }
+    action :query
+end
+
+template "racktables_admin.sql" do
+    path create_admin_sql
+    backup false
+    action :create
+end
+
+mysql_database "create admin user" do
+    connection mysql_connection_info
+    database_name node['racktables']['db']['name']
+    sql { ::File.open(create_admin_sql).read }
+    action :query
 end
