@@ -21,7 +21,7 @@ version = node['racktables']['source']['version']
 install_dir = node['racktables']['source']['install_dir']
 racktables_url= "https://github.com/RackTables/racktables/archive/RackTables-#{node['racktables']['source']['version']}.tar.gz"
 
-remote_file "#{Chef::Config['file_cache_path']}/Racktables-#{version}.tar.gz" do
+remote_file "#{Chef::Config['file_cache_path']}/RackTables-#{version}.tar.gz" do
   source racktables_url
   checksum node['racktables']['source']['checksum']
   backup false
@@ -31,8 +31,7 @@ end
 bash 'extract_module' do
   cwd Chef::Config['file_cache_path']
   code <<-EOH
-    tar xzvf Racktables-#{version}.tar.gz
-    (cp -r RackTables-#{version}/* #{install_dir})
-    (chown -R #{node['apache']['user']}:#{node['apache']['group']} #{install_dir})
+    tar xzvf RackTables-#{version}.tar.gz
+    (cp -r racktables-RackTables-#{version}/* #{install_dir})
   EOH
 end
