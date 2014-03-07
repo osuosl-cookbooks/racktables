@@ -4,14 +4,13 @@ driver:
   network:
     - ["forwarded_port", {guest: 80, host: 8080}]
 
-provisioner:
-  name: chef_solo
+driver_config:
+    require_chef_omnibus: true
+
+provisioner: chef_solo
 
 platforms:
-  - name: centos-6.5
-    driver:
-      box: osuosl-centos-6.5
-      box_url: http://vagrant.osuosl.org/centos-6-20140121.box
+  - name: centos-65
 
 suites:
   - name: default
