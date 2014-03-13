@@ -16,8 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "mysql::server"
-include_recipe "database::mysql"
+include_recipe "mysql::ruby"
+include_recipe "mysql::client"
 
 mysql_connection_info = {
     :host => node['racktables']['db']['host'],

@@ -15,6 +15,7 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[mysql::server]
       - recipe[racktables::default]
     attributes:
       mysql:
