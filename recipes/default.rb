@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
+include_recipe "racktables::database"
 include_recipe "racktables::server"
 include_recipe "racktables::#{node['racktables']['install_method']}"
-include_recipe "racktables::database"
 include_recipe "racktables::application"
