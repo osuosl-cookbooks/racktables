@@ -19,6 +19,7 @@
 
 include_recipe "apache2"
 include_recipe "apache2::mod_php5"
+
 if node['racktables']['ssl_enabled']
   include_recipe "apache2::mod_ssl"
 end
@@ -30,16 +31,18 @@ end
   end
 end
 
+directory "#{node['apache']['log_dir']}/racktables/" do
+   owner node['apache']['user']
+   group node['apache']['group']
+   mode 0755
+   action :create
+end
+
 web_app "racktables" do
-  server_name "inventory2.osuosl.org"
-  server_aliases ["inventory2"]
+  server_name node['fqdn']
+  server_aliases node['server_aliases']
   docroot "#{node['racktables']['source']['install_dir']}/wwwroot"
   redirect_http node['racktables']['redirect_http'] && node['racktables']['ssl_enabled']
   ssl_enabled node['racktables']['ssl_enabled']
   ssl_listen_ports node['racktables']['ssl_listen_ports']
 end
-
-directory "#{node['apache']['log_dir']}/racktables/" do
-   mode 00755
-end
-
