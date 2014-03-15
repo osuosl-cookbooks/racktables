@@ -44,5 +44,7 @@ bash 'extract_module' do
     (cp -r racktables-RackTables-#{version}/* #{install_dir})
     (chown -R #{node['apache']['user']}:#{node['apache']['group']} #{install_dir})
   EOH
-  not_if "grep #{version} #{install_dir}/ChangeLog"
+  not_if {
+    ::File.exists?("#{install_dir}/ChangeLog") && "grep #{version} #{install_dir}/ChangeLog"
+  }
 end
