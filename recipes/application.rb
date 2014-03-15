@@ -17,14 +17,9 @@
 # limitations under the License.
 #
 
-file "secret.php" do
+file "#{node['racktables']['source']['install_dir']}/wwwroot/inc/secret.php" do
+    owner node['apache']['user']
+    group node['apache']['group']
     mode 0666
     action :create
 end
-
-#template "secret.php" do
-#    path "#{node['racktables']['source']['install_dir']}/wwwroot/inc/secret.php"
-#    source 'secret.php.erb'
-#    mode "0666"
-#    action :create
-#end
