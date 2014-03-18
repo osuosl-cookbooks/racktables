@@ -16,24 +16,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "mysql::ruby"
-include_recipe "mysql::client"
 
-mysql_connection_info = {
-    :host => node['racktables']['db']['host'],
-    :username => 'root',
-    :password => node['mysql']['server_root_password']
-}
+db = node['racktables']['db']
 
-mysql_database node['racktables']['db']['name'] do
-    connection mysql_connection_info
-    action :create
-end
+if db['host'] == 'localhost'
+    include_recipe "mysql::server"
+    include_recipe "database::mysql"
 
-mysql_database_user node['racktables']['db']['user'] do
-    connection mysql_connection_info
-    password node['racktables']['db']['password']
-    database_name node['racktables']['db']['name']
-    privileges [:all]
-    action [:create, :grant]
+    mysql_connection_info = {
+        :host => db['host'],
+        :username => 'root',
+        :password => node['mysql']['server_root_password']
+    }
+
+    mysql_database db['name'] do
+        connection mysql_connection_info
+        action :create
+    end
+
+    mysql_database_user db['user'] do
+        connection mysql_connection_info
+        password db['password']
+        database_name db['name']
+        privileges [:all]
+        action [:create, :grant]
+    end
 end
