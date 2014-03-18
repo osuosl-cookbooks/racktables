@@ -8,6 +8,7 @@ gem 'vagrant-chef-zero'
 gem 'chef-zero', '~> 1.3'
 
 gem 'foodcritic'
+gem 'serverspec'
 
 gem 'kitchen-vagrant'
 gem 'test-kitchen'

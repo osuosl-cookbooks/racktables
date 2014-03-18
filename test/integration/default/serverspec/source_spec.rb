@@ -1,5 +1,5 @@
 # Tests for racktables::source
-require 'serverspec'
+require 'spec_helper'
 
 describe file('/var/www/html/racktables/') do
     it { should be_a_directory }

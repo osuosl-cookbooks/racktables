@@ -1,5 +1,5 @@
 # Tests for racktables::application
-require 'serverspec'
+require 'spec_helper'
 
 describe file('/var/www/html/racktables/wwwroot/inc/secret.php') do
     it { should be_a_file }

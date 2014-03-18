@@ -1,5 +1,5 @@
 # Tests for racktables::database
-require 'serverspec'
+require 'spec_helper'
 
 describe "Racktables SQL" do
     # Check the SQL db
