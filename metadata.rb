@@ -14,4 +14,3 @@ recipe 'racktables::database', 'Setup the database for Racktables'
 
 depends 'apache2'
 depends 'database'
-depends 'mysql'
