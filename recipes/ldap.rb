@@ -20,5 +20,5 @@ include_recipe "racktables::default"
 
 package "php-ldap" do
     action :install
-    notifies :restart, "service[apache2]", :immediate
+    notifies :restart, "service[apache2]", :delayed
 end
