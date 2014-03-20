@@ -1,4 +1,4 @@
-require_relative './spec_helper'
+require_relative 'spec_helper'
 
 describe 'racktables::server' do
     let (:chef_run) do

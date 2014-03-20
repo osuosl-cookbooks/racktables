@@ -1,4 +1,4 @@
-require_relative './spec_helper'
+require_relative 'spec_helper'
 
 describe 'racktables::application' do
     let (:chef_run) { ChefSpec::Runner.new.converge('racktables::application') }
