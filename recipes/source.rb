@@ -17,18 +17,21 @@
 # limitations under the License.
 #
 
-version = node['racktables']['source']['version']
-install_dir = node['racktables']['source']['install_dir']
-racktables_url= "https://github.com/RackTables/racktables/archive/RackTables-#{version}.tar.gz"
+source = node['racktables']['source']
 
-remote_file "#{Chef::Config['file_cache_path']}/RackTables-#{version}.tar.gz" do
-  source racktables_url
-  checksum node['racktables']['source']['checksum']
+version = source['version']
+install_dir = source['install_dir']
+
+tarball = "RackTables-#{version}.tar.gz"
+
+remote_file "#{Chef::Config['file_cache_path']}/#{tarball}" do
+  source "#{source['url']}/#{tarball}"
+  checksum source['checksum']
   backup false
   action :create
 end
 
-directory node['racktables']['source']['install_dir'] do
+directory install_dir do
   owner node['apache']['user']
   group node['apache']['group']
   mode 0755
