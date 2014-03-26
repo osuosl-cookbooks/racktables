@@ -31,8 +31,8 @@ end
 end
 
 web_app "racktables" do
-  server_name "inventory2.osuosl.org"
-  server_aliases ["inventory2"]
+  server_name "inventory.osuosl.org"
+  server_aliases ["inventory2.osuosl.org"]
   docroot "#{node['racktables']['source']['install_dir']}/wwwroot"
   redirect_http node['racktables']['redirect_http'] && node['racktables']['ssl_enabled']
   ssl_enabled node['racktables']['ssl_enabled']
