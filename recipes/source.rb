@@ -21,7 +21,7 @@ version = node['racktables']['source']['version']
 install_dir = node['racktables']['source']['install_dir']
 
 cookbook_file "#{Chef::Config['file_cache_path']}/Racktables-#{node['racktables']['source']['version']}.tar.gz" do
-  source "RackTables-#{node['racktables']['source']['version']}"
+  source "RackTables-#{node['racktables']['source']['version']}.tar.gz"
   action :create
 end
 
