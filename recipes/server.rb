@@ -33,7 +33,7 @@ end
 web_app "racktables" do
   server_name "inventory.osuosl.org"
   server_aliases ["inventory2.osuosl.org"]
-  docroot "#{node['racktables']['source']['install_dir']}/wwwroot"
+  docroot "#{node['racktables']['source']['install_dir']}/"
   redirect_http node['racktables']['redirect_http'] && node['racktables']['ssl_enabled']
   ssl_enabled node['racktables']['ssl_enabled']
   ssl_listen_ports node['racktables']['ssl_listen_ports']

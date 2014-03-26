@@ -1,7 +1,6 @@
 default['racktables']['install_method'] = "source"
 
 default['racktables']['source']['version'] = "0.20.7"
-default['racktables']['source']['checksum'] = "173a164f4"
 default['racktables']['source']['install_dir'] = "/var/www/racktables"
 
 default['racktables']['redirect_http'] = false

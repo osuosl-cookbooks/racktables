@@ -23,9 +23,9 @@ user 'racktables' do
   shell "/bin/false"
 end
 
-template "secret.php" do
-    path "#{node['racktables']['source']['install_dir']}/wwwroot/inc/secret.php"
-    source 'secret.php.erb'
-    mode "0666"
-    action :create
-end
+#template "secret.php" do
+#    path "#{node['racktables']['source']['install_dir']}/inc/secret.php"
+#    source 'secret.php.erb'
+#    mode "0666"
+#    action :create
+#end

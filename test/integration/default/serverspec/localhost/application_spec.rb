@@ -7,7 +7,7 @@ describe user('racktables') do
     it { should have_login_shell '/bin/false' }
 end
 
-describe file('/var/www/racktables/wwwroot/inc/secret.php') do
+describe file('/var/www/racktables/inc/secret.php') do
     it { should be_a_file}
     its(:content) { should match /\$pdo_dsn/ }
     its(:content) { should match /\$user_auth_src/ }
