@@ -20,10 +20,8 @@
 version = node['racktables']['source']['version']
 install_dir = node['racktables']['source']['install_dir']
 
-remote_file "#{Chef::Config['file_cache_path']}/Racktables-#{version}.tar.gz" do
-  source node['racktables']['source']['url']
-  checksum node['racktables']['source']['checksum']
-  backup false
+cookbook_file "#{Chef::Config['file_cache_path']}/Racktables-#{version}.tar.gz" do
+  source "RackTables-#{node['racktables']['version']}"
   action :create
 end
 
