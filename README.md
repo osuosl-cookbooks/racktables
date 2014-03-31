@@ -19,7 +19,7 @@ See `attributes/defaults.rb` for attribute defaults.
 * `node['racktables']['install_method']` - Installation method for
   RackTables.
 
-* `node['racktables']['admin']['password'] - Password for the administrative
+* `node['racktables']['admin']['password']` - Password for the administrative
   interface.
 
 ### Source Specific
@@ -28,7 +28,7 @@ See `attributes/defaults.rb` for attribute defaults.
 
 * `node['racktables']['source']['checksum']` - SHA256 of the tarball.
 
-* `node['racktables']['source']['install\_dir']` - Installation directory for
+* `node['racktables']['source']['install_dir']` - Installation directory for
   RackTables.
 
 * `node['racktables']['source']['url']` - URL of the source tarball
@@ -80,7 +80,11 @@ Run `kitchen test`.
 6. Submit a Pull Request using Github
 
 ## License and Authors
- - Author: Trevor Bramwell (bramwelt@osuosl.org)
+ - Author: Trevor Bramwell <bramwelt@osuosl.org>
+ - Author: Rudy Grigar <basic@osuosl.org>
+ - Author: Jordan Evans <jordane@osuosl.org>
+ - Author: Daniel Takamori <pono@osuosl.org>
+ - Author: Lance Albertson <lance@osuosl.org>
 
 ```text
 Copyright: 2013-2014 Oregon State University
