@@ -80,11 +80,11 @@ Run `kitchen test`.
 6. Submit a Pull Request using Github
 
 ## License and Authors
- - Author: Trevor Bramwell <bramwelt@osuosl.org>
- - Author: Rudy Grigar <basic@osuosl.org>
- - Author: Jordan Evans <jordane@osuosl.org>
- - Author: Daniel Takamori <pono@osuosl.org>
- - Author: Lance Albertson <lance@osuosl.org>
+ - Author: Trevor Bramwell (<bramwelt@osuosl.org>)
+ - Author: Rudy Grigar (<basic@osuosl.org>)
+ - Author: Jordan Evans (<jordane@osuosl.org>)
+ - Author: Daniel Takamori (<pono@osuosl.org>)
+ - Author: Lance Albertson (<lance@osuosl.org>)
 
 ```text
 Copyright: 2013-2014 Oregon State University
