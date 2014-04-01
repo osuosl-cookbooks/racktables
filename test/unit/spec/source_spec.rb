@@ -7,23 +7,15 @@ describe 'racktables::source' do
         end.converge('racktables::source')
     end
 
-    #before do
-    #    stub_command('wget foo').and_return('herps')
-    #end
-
     it 'should download tarball' do
         expect(chef_run).to create_remote_file("#{Chef::Config['file_cache_path']}/RackTables-0.0.1.tar.gz")
     end
 
-    it 'should create install directory' do
-        expect(chef_run).to create_directory('/var/www/html/racktables').with(
-            owner: 'apache',
-            group: 'apache',
-            mode: 0755
-        )
-    end
-
     it 'should extract tarball to install directory' do
         expect(chef_run).to run_bash('extract_module')
+    end
+
+    it 'should create a link to the current version' do
+        expect(chef_run).to create_link('/var/www/html/racktables/current')
     end
 end

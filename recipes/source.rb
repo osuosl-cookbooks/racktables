@@ -20,7 +20,8 @@
 source = node['racktables']['source']
 
 version = source['version']
-install_dir = "#{source['install_dir']}/racktables"
+install_dir = source['install_dir']
+version_dir = "#{install_dir}/#{version}"
 
 tarball = "RackTables-#{version}.tar.gz"
 
@@ -29,25 +30,19 @@ remote_file "#{Chef::Config['file_cache_path']}/#{tarball}" do
   checksum source['checksum']
   backup false
   action :create
+  not_if { ::File.exists?(version_dir) }
 end
 
-directory install_dir do
-  owner node['apache']['user']
-  group node['apache']['group']
-  mode 0755
-  recursive true
-  action :create
-end
-
-# Only extract the Tarball if the version is not the latest
 bash 'extract_module' do
   cwd Chef::Config['file_cache_path']
   code <<-EOH
-    tar xzvf RackTables-#{version}.tar.gz
-    (cp -r racktables-RackTables-#{version}/* #{install_dir})
-    (chown -R #{node['apache']['user']}:#{node['apache']['group']} #{install_dir})
+    mkdir -p #{version_dir}
+    (tar xzvf RackTables-#{version}.tar.gz --strip-components=1 -C #{version_dir})
   EOH
-  not_if {
-    ::File.exists?("#{install_dir}/ChangeLog") && "grep #{version} #{install_dir}/ChangeLog"
-  }
+  not_if { ::File.exists?(version_dir) }
+end
+
+link "#{install_dir}/current" do
+  to "#{version_dir}/wwwroot"
+  action :create
 end

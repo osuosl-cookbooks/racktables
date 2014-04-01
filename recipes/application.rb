@@ -17,7 +17,9 @@
 # limitations under the License.
 #
 
-file "#{node['racktables']['source']['install_dir']}/racktables/wwwroot/inc/secret.php" do
+install_dir = node['racktables']['source']['install_dir']
+
+file "#{install_dir}/current/inc/secret.php" do
     owner node['apache']['user']
     group node['apache']['group']
     mode 0666

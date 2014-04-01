@@ -41,7 +41,7 @@ end
 web_app "racktables" do
   server_name node['fqdn']
   server_aliases node['racktables']['server_aliases']
-  docroot "#{node['racktables']['source']['install_dir']}/wwwroot"
+  docroot "#{node['racktables']['source']['install_dir']}/current"
   redirect_http node['racktables']['redirect_http'] && node['racktables']['ssl_enabled']
   ssl_enabled node['racktables']['ssl_enabled']
   ssl_listen_ports node['racktables']['ssl_listen_ports']

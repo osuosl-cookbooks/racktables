@@ -1,14 +1,10 @@
 # Tests for racktables::source
 require 'spec_helper'
 
-describe file('/var/www/html/racktables/') do
+describe file('/var/www/html/racktables/0.20.4/') do
     it { should be_a_directory }
-    it { should be_owned_by 'apache' }
-    it { should be_grouped_into 'apache' }
 end
 
-describe file('/var/www/html/racktables/wwwroot/') do
-    it { should be_a_directory }
-    it { should be_owned_by 'apache' }
-    it { should be_grouped_into 'apache' }
+describe file('/var/www/html/racktables/current') do
+    it { should be_linked_to '/var/www/html/racktables/0.20.4/wwwroot'}
 end
