@@ -20,8 +20,6 @@
 install_dir = node['racktables']['source']['install_dir']
 
 file "#{install_dir}/current/inc/secret.php" do
-    owner node['apache']['user']
-    group node['apache']['group']
     mode 0666
     action :create
 end
