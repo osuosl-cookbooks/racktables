@@ -2,7 +2,7 @@ default['racktables']['install_method'] = "source"
 
 default['racktables']['source']['version'] = "0.20.4"
 default['racktables']['source']['checksum'] = "cbd1e2...2b4f65"
-default['racktables']['source']['install_dir'] = "/var/www/html/racktables"
+default['racktables']['source']['install_dir'] = "/var/www/html"
 default['racktables']['source']['url'] = "https://github.com/RackTables/racktables/archive"
 
 default['racktables']['server_aliases'] = [node['fqdn']]

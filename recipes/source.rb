@@ -20,7 +20,7 @@
 source = node['racktables']['source']
 
 version = source['version']
-install_dir = source['install_dir']
+install_dir = "#{source['install_dir']}/racktables"
 
 tarball = "RackTables-#{version}.tar.gz"
 
