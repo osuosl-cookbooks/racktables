@@ -1,7 +1,0 @@
-LOCK TABLES `UserAccount` WRITE;
-INSERT INTO `UserAccount` VALUES(
-    NULL,
-    'admin',
-    SHA1('<%= node['racktables']['admin']['password'] %>'),
-    'RackTables Administrator');
-UNLOCK TABLES;

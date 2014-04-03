@@ -2,8 +2,14 @@ source 'https://rubygems.org'
 
 gem 'berkshelf'
 
-group :development do
-  gem 'foodcritic'
-  gem 'kitchen-vagrant'
-  gem 'test-kitchen'
-end
+gem 'vagrant-omnibus'
+
+gem 'vagrant-chef-zero'
+gem 'chef-zero', '~> 1.3'
+
+gem 'foodcritic'
+gem 'chefspec'
+gem 'serverspec'
+
+gem 'kitchen-vagrant'
+gem 'test-kitchen'

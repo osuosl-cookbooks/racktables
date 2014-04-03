@@ -16,51 +16,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "database::mysql"
 
-#mysql_connection_info = {
-#    :host => node['racktables']['db']['host'],
-#    :username => 'root',
-#    :password => node['mysql']['server_root_password']
-#}
-#create_tables_sql = "#{Chef::Config['file_cache_path']}/racktables_db.sql"
-#create_admin_sql = "#{Chef::Config['file_cache_path']}/racktables_admin.sql"
-#
-#mysql_database node['racktables']['db']['name'] do
-#    connection mysql_connection_info
-#    action :create
-#end
-#
-#mysql_database_user node['racktables']['db']['user'] do
-#    connection mysql_connection_info
-#    password node['racktables']['db']['password']
-#    database_name node['racktables']['db']['name']
-#    privileges [:all]
-#    action [:create, :grant]
-#end
-#
-#cookbook_file "racktables_db.sql" do
-#    path create_tables_sql
-#    backup false
-#    action :create
-#end
-#
-#mysql_database "create racktables db tables" do
-#    connection mysql_connection_info
-#    database_name node['racktables']['db']['name']
-#    sql { ::File.open(create_tables_sql).read }
-#    action :query
-#end
-#
-#template "racktables_admin.sql" do
-#    path create_admin_sql
-#    backup false
-#    action :create
-#end
-#
-#mysql_database "create admin user" do
-#    connection mysql_connection_info
-#    database_name node['racktables']['db']['name']
-#    sql { ::File.open(create_admin_sql).read }
-#    action :query
-#end
+db = node['racktables']['db']
+
+if db['host'] == 'localhost'
+    include_recipe "mysql::server"
+    include_recipe "database::mysql"
+
+    mysql_connection_info = {
+        :host => db['host'],
+        :username => 'root',
+        :password => node['mysql']['server_root_password']
+    }
+
+    mysql_database db['name'] do
+        connection mysql_connection_info
+        action :create
+    end
+
+    mysql_database_user db['user'] do
+        connection mysql_connection_info
+        password db['password']
+        database_name db['name']
+        privileges [:all]
+        action [:create, :grant]
+    end
+end

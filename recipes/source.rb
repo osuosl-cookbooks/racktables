@@ -17,19 +17,30 @@
 # limitations under the License.
 #
 
-version = node['racktables']['source']['version']
-install_dir = node['racktables']['source']['install_dir']
+source = node['racktables']['source']
 
-cookbook_file "#{Chef::Config['file_cache_path']}/Racktables-#{node['racktables']['source']['version']}.tar.gz" do
-  source "RackTables-#{node['racktables']['source']['version']}.tar.gz"
+version = source['version']
+install_dir = source['install_dir']
+version_dir = "#{install_dir}/#{version}"
+
+tarball = "RackTables-#{version}.tar.gz"
+
+cookbook_file "#{Chef::Config['file_cache_path']}/#{tarball}" do
+  source tarball
   action :create
+  not_if { ::File.exists?(version_dir) }
 end
 
 bash 'extract_module' do
   cwd Chef::Config['file_cache_path']
   code <<-EOH
-    tar xzvf Racktables-#{version}.tar.gz
-    (cp -r RackTables-#{version}/* #{install_dir})
-    (chown -R #{node['apache']['user']}:#{node['apache']['group']} #{install_dir})
+    mkdir -p #{version_dir}
+    (tar xzvf RackTables-#{version}.tar.gz --strip-components=1 -C #{version_dir})
   EOH
+  not_if { ::File.exists?(version_dir) }
+end
+
+link "#{install_dir}/current" do
+  to "#{version_dir}/wwwroot"
+  action :create
 end

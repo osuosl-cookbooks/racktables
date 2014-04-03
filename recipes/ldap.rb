@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: racktables
-# Recipe:: server
+# Recipe:: ldap
 #
 # Copyright (C) 2013, Oregon State University
 #
@@ -16,10 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "racktables::default"
 
-install_dir = node['racktables']['source']['install_dir']
-
-file "#{install_dir}/current/inc/secret.php" do
-    mode 0666
-    action :create
+package "php-ldap" do
+    action :install
+    notifies :restart, "service[apache2]", :delayed
 end

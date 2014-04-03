@@ -68,7 +68,6 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-      "recipe[mysql::server]",
       "recipe[racktables::default]"
     ]
   end

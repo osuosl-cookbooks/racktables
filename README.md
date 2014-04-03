@@ -1,119 +1,77 @@
-racktables Cookbook
-===================
-Cookbook for managing and deploying [Racktables](http://racktables.org/).
+# RackTables Cookbook
+Cookbook for managing and deploying [RackTables](http://racktables.org/).
 
+## Requirements
+ * Chef
 
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any
-requirements this cookbook has on platforms, libraries, other cookbooks,
-packages, operating systems, etc.
+## Platform
+ * CentOS, Red Hat, Fedora
 
-e.g.
-#### packages
-- `toaster` - racktables needs toaster to brown your bagel.
+## Cookbooks
+RackTables depends upon:
+ * [apache2](https://github.com/opscode-cookbooks/apache2)
+ * [database](https://github.com/opscode-cookbooks/database)
+ * [mysql](https://github.com/opscode-cookbooks/mysql) - If testing
 
-Attributes
-----------
+## Attributes
+See `attributes/defaults.rb` for attribute defaults.
 
-#### racktables::default
+* `node['racktables']['install_method']` - Installation method for
+  RackTables.
 
-* node["racktables"]["install_method"]
+* `node['racktables']['admin']['password']` - Password for the administrative
+  interface.
 
-  Method to install racktables.
+### Source Specific
+* `node['racktables']['source']['version']` - Version of RackTables to
+  install.
 
-  Options:
-    * 'source'
+* `node['racktables']['source']['checksum']` - SHA256 of the tarball.
 
-  Default: 'source'
+* `node['racktables']['source']['install_dir']` - Installation directory for
+  RackTables.
 
-* node["racktables"]["source"]
+* `node['racktables']['source']['url']` - URL of the source tarball
+  directory.
 
-  Source of the racktables tarball.
+### Apache Specific
+* `node['racktables']['server_aliases']` - List of server aliases to populate
+  the vhost.
 
-  Default: "http://sourceforge.net/projects/racktables/files/RackTables-0.20.4.tar.gz/download"
+* `node['racktables']['redirect_http']` - Redirect all HTTP traffic to HTTPS
 
-* node["racktables"]["checksum"]
+* `node['racktables']['ssl_enabled']` - Enable SSL.
 
-  MD5 Checksum of the tarball to be downloaded.
+* `node['racktables']['ssl_listen_ports']` - Ports on which SSL should listen.
 
-* node["racktables"]["dir"]
+* `node['racktables']['cert_path']` - Path to the SSL certificate file.
 
-  Directory to install racktables to.
+* `node['racktables']['key_path']` - Path to the SSL key file.
 
-  Default: '/var/www/racktables'
+### Database Specific
+* `node['racktables']['db']['name']` - Database name.
 
-* node["racktables"]["redirect_http"] 
+* `node['racktables']['db']['user']` - Database user.
 
-  Redirect all HTTP traffic to HTTPS
+* `node['racktables']['db']['host']` - Datbase host.
 
-  Default: true
+* `node['racktables']['db']['password']` - Database password. Should be stored
+  in an encrypted databag.
 
-* node["racktables"]["ssl_enabled"]
+## Usage
+On a client node, add the default recipe to the runlist.
 
-  Enable SSL.
-
-  Default: true
-
-* node["racktables"]["ssl_listen_ports"]
-
-  Ports on which SSL should listen.
-
-  Default: ["443"]
-
-* node["racktables"]["cert_path"] 
-  
-  Path to the SSL certificate file.
-
-  Default: '/etc/pki/tls/certs/wildcard.pem'
-
-* node["racktables"]["key_path"]
-  
-  Path to the SSL key file.
-
-  Default: '/etc/pki/tls/private/wildcard.key'
-
-* node["racktables"]["db"]["name"]
-
-  Database name.
-
-  Default: 'racktables\_db'
-
-* node["racktables"]["db"]["user"]
-
-  Database user.
-
-  Default: 'racktables\_user'
-
-* node["racktables"]["db"]["password"]
-
-  Database password. Should be stored in an encrypted databag.
-
-  Default: 'password'
-
-Usage
------
-#### racktables::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
-Just include `racktables` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[racktables]"
-  ]
-}
+```javascript
+{ "runlist": ["recipe[racktables::default]"] }
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for
-contributing. If this is a private cookbook, remove this section.
+After the node converges, navigate to the installation module URL. With the
+defaults, this is: `http://localhost:8080/?module=installer`
 
-e.g.
+## Testing
+Run `kitchen test`.
+
+## Contributing
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write you change
@@ -121,6 +79,25 @@ e.g.
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-License and Authors
--------------------
-Authors: TODO: List authors
+## License and Authors
+ - Author: Trevor Bramwell (<bramwelt@osuosl.org>)
+ - Author: Rudy Grigar (<basic@osuosl.org>)
+ - Author: Jordan Evans (<jordane@osuosl.org>)
+ - Author: Daniel Takamori (<pono@osuosl.org>)
+ - Author: Lance Albertson (<lance@osuosl.org>)
+
+```text
+Copyright: 2013-2014 Oregon State University
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
