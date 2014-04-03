@@ -3,8 +3,8 @@ require_relative 'spec_helper'
 describe 'racktables::server' do
     let (:chef_run) do
         ChefSpec::Runner.new do |node|
-            node.set['racktables']['ssl_enabled'] = true
-            node.set['racktables']['ssl_listen_ports'] = [443]
+            node.set['racktables']['vhost']['ssl_enabled'] = true
+            node.set['racktables']['vhost']['ssl_listen_ports'] = [443]
         end.converge('racktables::server')
     end
 

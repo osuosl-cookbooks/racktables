@@ -20,7 +20,10 @@
 include_recipe "apache2"
 include_recipe "apache2::mod_php5"
 
-if node['racktables']['ssl_enabled']
+vhost = node['racktables']['vhost']
+apache = node['apache']
+
+if vhost['ssl_enabled']
   include_recipe "apache2::mod_ssl"
 end
 
@@ -31,18 +34,18 @@ end
   end
 end
 
-directory "#{node['apache']['log_dir']}/racktables/" do
-   owner node['apache']['user']
-   group node['apache']['group']
+directory "#{apache['log_dir']}/racktables/" do
+   owner apache['user']
+   group apache['group']
    mode 0755
    action :create
 end
 
 web_app "racktables" do
   server_name node['fqdn']
-  server_aliases node['racktables']['server_aliases']
+  server_aliases vhost['server_aliases']
   docroot "#{node['racktables']['source']['install_dir']}/current"
-  redirect_http node['racktables']['redirect_http'] && node['racktables']['ssl_enabled']
-  ssl_enabled node['racktables']['ssl_enabled']
-  ssl_listen_ports node['racktables']['ssl_listen_ports']
+  redirect_http vhost['redirect_http'] && vhost['ssl_enabled']
+  ssl_enabled vhost['ssl_enabled']
+  ssl_listen_ports vhost['ssl_listen_ports']
 end
