@@ -8,7 +8,7 @@ describe 'racktables::source' do
     end
 
     it 'should download tarball' do
-        expect(chef_run).to create_remote_file("#{Chef::Config['file_cache_path']}/RackTables-0.0.1.tar.gz")
+        expect(chef_run).to create_cookbook_file("#{Chef::Config['file_cache_path']}/RackTables-0.0.1.tar.gz")
     end
 
     it 'should extract tarball to install directory' do
