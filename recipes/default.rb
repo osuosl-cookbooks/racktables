@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-if db['host'] == 'localhost'
+if node['racktables']['db']['host'] == 'localhost'
     include_recipe "racktables::database"
 end
 include_recipe "racktables::server"
