@@ -19,26 +19,24 @@
 
 db = node['racktables']['db']
 
-if db['host'] == 'localhost'
-    include_recipe "mysql::server"
-    include_recipe "database::mysql"
+include_recipe "mysql::server"
+include_recipe "database::mysql"
 
-    mysql_connection_info = {
-        :host => db['host'],
-        :username => 'root',
-        :password => node['mysql']['server_root_password']
-    }
+mysql_connection_info = {
+    :host => db['host'],
+    :username => 'root',
+    :password => node['mysql']['server_root_password']
+}
 
-    mysql_database db['name'] do
-        connection mysql_connection_info
-        action :create
-    end
+mysql_database db['name'] do
+    connection mysql_connection_info
+    action :create
+end
 
-    mysql_database_user db['user'] do
-        connection mysql_connection_info
-        password db['password']
-        database_name db['name']
-        privileges [:all]
-        action [:create, :grant]
-    end
+mysql_database_user db['user'] do
+    connection mysql_connection_info
+    password db['password']
+    database_name db['name']
+    privileges [:all]
+    action [:create, :grant]
 end

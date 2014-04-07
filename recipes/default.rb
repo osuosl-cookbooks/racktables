@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "racktables::database"
+if db['host'] == 'localhost'
+    include_recipe "racktables::database"
+end
 include_recipe "racktables::server"
 include_recipe "racktables::application"
