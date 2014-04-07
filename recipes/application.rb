@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: racktables
-# Recipe:: server
+# Recipe:: application
 #
 # Copyright (C) 2013, Oregon State University
 #
@@ -18,8 +18,18 @@
 #
 
 install_dir = node['racktables']['source']['install_dir']
+db = node['racktables']['db']
 
-file "#{install_dir}/current/inc/secret.php" do
-    mode 0666
+template "#{install_dir}/current/inc/secret.php" do
+    source "secret.php.erb"
+    owner node['apache']['user']
+    group node['apache']['group']
+    mode 0400
+    variables(
+        :db_host => db['hostname'],
+        :db_name => db['name'],
+        :db_user => db['user'],
+        :db_pass => db['password']
+    )
     action :create
 end
