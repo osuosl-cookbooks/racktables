@@ -1,9 +1,4 @@
-default['racktables']['install_method'] = "source"
-
-default['racktables']['source']['version'] = "0.20.7"
-default['racktables']['source']['checksum'] = "cbd1e2...2b4f65"
-default['racktables']['source']['install_dir'] = "#{node['apache']['docroot_dir']}/racktables"
-default['racktables']['source']['url'] = "https://github.com/RackTables/racktables/archive"
+default['racktables']['install_dir'] = "#{node['apache']['docroot_dir']}/racktables"
 
 default['racktables']['vhost']['server_aliases'] = [node['fqdn']]
 default['racktables']['vhost']['redirect_http'] = false

@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-install_dir = node['racktables']['source']['install_dir']
+install_dir = node['racktables']['install_dir']
 db = node['racktables']['db']
 
 template "#{install_dir}/current/inc/secret.php" do
