@@ -4,7 +4,7 @@ maintainer_email 'system@osuosl.org'
 license          'Apache 2.0'
 description      'Manages deploying Racktables: the datacenter asset manager'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.3.3'
+version          '1.0.0'
 
 recipe 'racktables::default', 'Install from source, and setup web app'
 recipe 'racktables::server', 'Setup the racktables web appliction using apache'
