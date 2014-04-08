@@ -18,9 +18,10 @@
 #
 
 install_dir = node['racktables']['install_dir']
-db = node['racktables']['db']
 
 secret_path = "#{install_dir}/current/inc"
+
+db = Chef::EncryptedDataBagItem.load("racktables", "database")
 
 directory secret_path do
     recursive true
