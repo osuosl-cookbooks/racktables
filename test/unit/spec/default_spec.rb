@@ -9,9 +9,15 @@ describe 'racktables::default' do
     end
 
     it 'should include all recipes by default' do
-        expect(chef_run).to include_recipe('racktables::source')
         expect(chef_run).to include_recipe('racktables::database')
         expect(chef_run).to include_recipe('racktables::application')
         expect(chef_run).to include_recipe('racktables::server')
+    end
+
+    it 'should not include the database recipe if not on localhost' do
+        chef_run.node.set['racktables']['db']['host'] = 'somefqdn.example.com'
+        chef_run.converge('racktables::default')
+
+        expect(chef_run).to_not include_recipe('racktables::database')
     end
 end

@@ -15,14 +15,6 @@ describe 'racktables::database' do
         expect(chef_run).to include_recipe('database::mysql')
     end
 
-    it 'does not include recipes if not on localhost' do
-        chef_run.node.set['racktables']['db']['host'] = 'somefqdn.example.com'
-        chef_run.converge('racktables::database')
-
-        expect(chef_run).to_not include_recipe('mysql::server')
-        expect(chef_run).to_not include_recipe('database::mysql')
-    end
-
     # The following tests require a custom 'mysql_database' and
     # 'mysql_database_user' to exist. These currently exist in
     # 'support/matchers' but need to be pushed upstream to the

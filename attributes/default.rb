@@ -1,6 +1,6 @@
 default['racktables']['install_dir'] = "#{node['apache']['docroot_dir']}/racktables"
 
-default['racktables']['vhost']['server_name'] = nil
+default['racktables']['vhost']['server_name'] = node['fqdn']
 default['racktables']['vhost']['server_aliases'] = [node['fqdn']]
 default['racktables']['vhost']['redirect_http'] = false
 default['racktables']['vhost']['ssl_enabled'] = false

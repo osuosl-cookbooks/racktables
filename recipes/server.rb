@@ -41,7 +41,7 @@ directory "#{apache['log_dir']}/racktables/" do
 end
 
 web_app "racktables" do
-  server_name vhost['server_name'] if vhost['server_name']
+  server_name vhost['server_name']
   server_aliases vhost['server_aliases']
   docroot node['racktables']['install_dir']
   redirect_http vhost['redirect_http'] && vhost['ssl_enabled']

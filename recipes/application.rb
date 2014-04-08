@@ -20,13 +20,20 @@
 install_dir = node['racktables']['install_dir']
 db = node['racktables']['db']
 
-template "#{install_dir}/current/inc/secret.php" do
+secret_path = "#{install_dir}/current/inc"
+
+directory secret_path do
+    recursive true
+    action :create
+end
+
+template "#{secret_path}/secret.php" do
     source "secret.php.erb"
     owner node['apache']['user']
     group node['apache']['group']
     mode 0400
     variables(
-        :db_host => db['hostname'],
+        :db_host => db['host'],
         :db_name => db['name'],
         :db_user => db['user'],
         :db_pass => db['password']
