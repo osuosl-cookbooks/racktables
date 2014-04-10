@@ -37,6 +37,18 @@ See `attributes/defaults.rb` for attribute defaults.
 
 * `node['racktables']['key_path']` - Path to the SSL key file.
 
+Data Bags
+---------
+Racktables looks for an encrypted data bag under `racktables/database`
+for adding database credentials to `secret.php`. These should have been
+created during the installation of RackTables and stored in a safe
+place.
+
+* `database['host']` - Hostname of the database server.
+* `database['name']` - Name of the RackTables database.
+* `database['user']` - Username for the RackTables database.
+* `database['password']` - Password of the RackTables database user.
+
 Usage
 -----
 Before applying this cookbook, a RackTables installation should exist on
