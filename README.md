@@ -22,21 +22,20 @@ See `attributes/defaults.rb` for attribute defaults.
 * `node['racktables']['install_dir']` - Root directory of RackTables
   installation.
 
-### Apache Specific
-* `node['racktables']['vhost']['server_name']` - vhost ServerName.
+* `node['racktables']['server_name']` - vhost ServerName.
 
-* `node['racktables']['vhost']['server_aliases']` - List of server aliases to populate
+* `node['racktables']['server_aliases']` - List of server aliases to populate
   the vhost.
 
-* `node['racktables']['vhost']['redirect_http']` - Redirect all HTTP traffic to HTTPS
+* `node['racktables']['redirect_http']` - Redirect all HTTP traffic to HTTPS
 
-* `node['racktables']['vhost']['ssl_enabled']` - Enable SSL.
+* `node['racktables']['ssl_enabled']` - Enable SSL.
 
-* `node['racktables']['vhost']['ssl_listen_ports']` - Ports on which SSL should listen.
+* `node['racktables']['ssl_listen_ports']` - Ports on which SSL should listen.
 
-* `node['racktables']['vhost']['cert_path']` - Path to the SSL certificate file.
+* `node['racktables']['cert_path']` - Path to the SSL certificate file.
 
-* `node['racktables']['vhost']['key_path']` - Path to the SSL key file.
+* `node['racktables']['key_path']` - Path to the SSL key file.
 
 Usage
 -----
