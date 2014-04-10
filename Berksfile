@@ -1,5 +1,5 @@
-cookbook "yum", "< 3.0.0"
+chef_api :config
 
-site :opscode
+cookbook "yum", "< 3.0.0"
 
 metadata
