@@ -1,4 +1,4 @@
-default['racktables']['install_dir'] = "#{node['apache']['docroot_dir']}/racktables"
+default['racktables']['install_dir'] = "#{node['apache']['docroot_dir']}/racktables/wwwroot"
 
 default['racktables']['vhost']['server_name'] = node['fqdn']
 default['racktables']['vhost']['server_aliases'] = [node['fqdn']]

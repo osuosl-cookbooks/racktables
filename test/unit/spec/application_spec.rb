@@ -15,13 +15,13 @@ describe 'racktables::application' do
     end
 
     it 'should create the secret file directory' do
-        expect(chef_run).to create_directory('/var/www/html/racktables/current/inc').with(
+        expect(chef_run).to create_directory('/var/www/html/racktables/wwwroot/inc').with(
             recursive: true
         )
     end
 
     it 'should touch/chmod the secret.php file' do
-        expect(chef_run).to create_template('/var/www/html/racktables/current/inc/secret.php').with(
+        expect(chef_run).to create_template('/var/www/html/racktables/wwwroot/inc/secret.php').with(
             mode: 0400
         )
     end

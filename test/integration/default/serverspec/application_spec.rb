@@ -1,7 +1,7 @@
 # Tests for racktables::application
 require 'spec_helper'
 
-describe file('/var/www/html/racktables/current/inc/secret.php') do
+describe file('/var/www/html/racktables/wwwroot/inc/secret.php') do
     it { should be_a_file }
     it { should be_mode 400 }
     its(:content) { should match /\$pdo_dsn = 'mysql:host=localhost;dbname=racktables_db';/ }

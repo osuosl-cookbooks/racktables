@@ -19,7 +19,7 @@
 
 install_dir = node['racktables']['install_dir']
 
-secret_path = "#{install_dir}/current/inc"
+secret_path = "#{install_dir}/inc"
 
 db = Chef::EncryptedDataBagItem.load("racktables", "database")
 
