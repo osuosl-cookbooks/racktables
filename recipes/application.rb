@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: racktables
-# Recipe:: server
+# Recipe:: application
 #
 # Copyright (C) 2013, Oregon State University
 #
@@ -17,9 +17,27 @@
 # limitations under the License.
 #
 
-install_dir = node['racktables']['source']['install_dir']
+install_dir = node['racktables']['install_dir']
 
-file "#{install_dir}/current/inc/secret.php" do
-    mode 0666
+secret_path = "#{install_dir}/inc"
+
+db = Chef::EncryptedDataBagItem.load("racktables", "database")
+
+directory secret_path do
+    recursive true
+    action :create
+end
+
+template "#{secret_path}/secret.php" do
+    source "secret.php.erb"
+    owner node['apache']['user']
+    group node['apache']['group']
+    mode 0400
+    variables(
+        :db_host => db['host'],
+        :db_name => db['name'],
+        :db_user => db['user'],
+        :db_pass => db['password']
+    )
     action :create
 end

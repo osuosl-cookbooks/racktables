@@ -19,13 +19,12 @@
 
 include_recipe "apache2"
 include_recipe "apache2::mod_php5"
-
-vhost = node['racktables']['vhost']
-apache = node['apache']
-
-if vhost['ssl_enabled']
+if node['racktables']['ssl_enabled']
   include_recipe "apache2::mod_ssl"
 end
+
+vhost = node['racktables']
+apache = node['apache']
 
 %w{php php-mysql php-pdo php-gd php-snmp php-mbstring
    php-bcmath}.each do |pkg|
@@ -42,11 +41,9 @@ directory "#{apache['log_dir']}/racktables/" do
 end
 
 web_app "racktables" do
-  server_name node['fqdn']
-  #server_name "inventory.osuosl.org"
+  server_name vhost['server_name']
   server_aliases vhost['server_aliases']
-  #server_aliases ["inventory2.osuosl.org"]
-  docroot "#{node['racktables']['source']['install_dir']}/current"
+  docroot vhost['install_dir']
   redirect_http vhost['redirect_http'] && vhost['ssl_enabled']
   ssl_enabled vhost['ssl_enabled']
   ssl_listen_ports vhost['ssl_listen_ports']

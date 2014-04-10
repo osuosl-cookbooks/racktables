@@ -1,40 +1,29 @@
-# RackTables Cookbook
-Cookbook for managing and deploying [RackTables](http://racktables.org/).
+RackTables Cookbook
+===================
+Cookbook for managing [RackTables](http://racktables.org/).
 
-## Requirements
+Requirements
+------------
  * Chef
 
-## Platform
+Platform
+--------
  * CentOS, Red Hat, Fedora
 
-## Cookbooks
+Cookbooks
+---------
 RackTables depends upon:
  * [apache2](https://github.com/opscode-cookbooks/apache2)
- * [database](https://github.com/opscode-cookbooks/database)
- * [mysql](https://github.com/opscode-cookbooks/mysql) - If testing
 
-## Attributes
+Attributes
+----------
 See `attributes/defaults.rb` for attribute defaults.
 
-* `node['racktables']['install_method']` - Installation method for
-  RackTables.
+* `node['racktables']['install_dir']` - Root directory of RackTables
+  installation.
 
-* `node['racktables']['admin']['password']` - Password for the administrative
-  interface.
+* `node['racktables']['server_name']` - vhost ServerName.
 
-### Source Specific
-* `node['racktables']['source']['version']` - Version of RackTables to
-  install.
-
-* `node['racktables']['source']['checksum']` - SHA256 of the tarball.
-
-* `node['racktables']['source']['install_dir']` - Installation directory for
-  RackTables.
-
-* `node['racktables']['source']['url']` - URL of the source tarball
-  directory.
-
-### Apache Specific
 * `node['racktables']['server_aliases']` - List of server aliases to populate
   the vhost.
 
@@ -48,30 +37,37 @@ See `attributes/defaults.rb` for attribute defaults.
 
 * `node['racktables']['key_path']` - Path to the SSL key file.
 
-### Database Specific
-* `node['racktables']['db']['name']` - Database name.
+Data Bags
+---------
+Racktables looks for an encrypted data bag under `racktables/database`
+for adding database credentials to `secret.php`. These should have been
+created during the installation of RackTables and stored in a safe
+place.
 
-* `node['racktables']['db']['user']` - Database user.
+* `database['host']` - Hostname of the database server.
+* `database['name']` - Name of the RackTables database.
+* `database['user']` - Username for the RackTables database.
+* `database['password']` - Password of the RackTables database user.
 
-* `node['racktables']['db']['host']` - Datbase host.
+Usage
+-----
+Before applying this cookbook, a RackTables installation should exist on
+the client node. If a RackTables installation does not exist,
+installation instructions can be found in the RackTables
+[README](https://github.com/RackTables/racktables/blob/master/README).
 
-* `node['racktables']['db']['password']` - Database password. Should be stored
-  in an encrypted databag.
-
-## Usage
 On a client node, add the default recipe to the runlist.
 
 ```javascript
 { "runlist": ["recipe[racktables::default]"] }
 ```
 
-After the node converges, navigate to the installation module URL. With the
-defaults, this is: `http://localhost:8080/?module=installer`
-
-## Testing
+Testing
+-------
 Run `kitchen test`.
 
-## Contributing
+Contributing
+------------
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write you change
@@ -79,7 +75,8 @@ Run `kitchen test`.
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-## License and Authors
+License and Authors
+-------------------
  - Author: Trevor Bramwell (<bramwelt@osuosl.org>)
  - Author: Rudy Grigar (<basic@osuosl.org>)
  - Author: Jordan Evans (<jordane@osuosl.org>)

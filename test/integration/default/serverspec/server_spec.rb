@@ -26,7 +26,7 @@ end
 # Vhost file exists
 describe file("/etc/httpd/sites-enabled/racktables.conf") do
     it { should be_file }
-    its(:content) { should match /DocumentRoot \/var\/www\/html\/racktables\/current/ }
+    its(:content) { should match /DocumentRoot \/var\/www\/html\/racktables/ }
 end
 
 # Log directory exists
