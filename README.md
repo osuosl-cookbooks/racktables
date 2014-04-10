@@ -1,77 +1,62 @@
-# RackTables Cookbook
-Cookbook for managing and deploying [RackTables](http://racktables.org/).
+RackTables Cookbook
+===================
+Cookbook for managing [RackTables](http://racktables.org/).
 
-## Requirements
+Requirements
+------------
  * Chef
 
-## Platform
+Platform
+--------
  * CentOS, Red Hat, Fedora
 
-## Cookbooks
+Cookbooks
+---------
 RackTables depends upon:
  * [apache2](https://github.com/opscode-cookbooks/apache2)
- * [database](https://github.com/opscode-cookbooks/database)
- * [mysql](https://github.com/opscode-cookbooks/mysql) - If testing
 
-## Attributes
+Attributes
+----------
 See `attributes/defaults.rb` for attribute defaults.
 
-* `node['racktables']['install_method']` - Installation method for
-  RackTables.
-
-* `node['racktables']['admin']['password']` - Password for the administrative
-  interface.
-
-### Source Specific
-* `node['racktables']['source']['version']` - Version of RackTables to
-  install.
-
-* `node['racktables']['source']['checksum']` - SHA256 of the tarball.
-
-* `node['racktables']['source']['install_dir']` - Installation directory for
-  RackTables.
-
-* `node['racktables']['source']['url']` - URL of the source tarball
-  directory.
+* `node['racktables']['install_dir']` - Root directory of RackTables
+  installation.
 
 ### Apache Specific
-* `node['racktables']['server_aliases']` - List of server aliases to populate
+* `node['racktables']['vhost']['server_name']` - vhost ServerName.
+
+* `node['racktables']['vhost']['server_aliases']` - List of server aliases to populate
   the vhost.
 
-* `node['racktables']['redirect_http']` - Redirect all HTTP traffic to HTTPS
+* `node['racktables']['vhost']['redirect_http']` - Redirect all HTTP traffic to HTTPS
 
-* `node['racktables']['ssl_enabled']` - Enable SSL.
+* `node['racktables']['vhost']['ssl_enabled']` - Enable SSL.
 
-* `node['racktables']['ssl_listen_ports']` - Ports on which SSL should listen.
+* `node['racktables']['vhost']['ssl_listen_ports']` - Ports on which SSL should listen.
 
-* `node['racktables']['cert_path']` - Path to the SSL certificate file.
+* `node['racktables']['vhost']['cert_path']` - Path to the SSL certificate file.
 
-* `node['racktables']['key_path']` - Path to the SSL key file.
+* `node['racktables']['vhost']['key_path']` - Path to the SSL key file.
 
-### Database Specific
-* `node['racktables']['db']['name']` - Database name.
+Usage
+-----
+Before applying this cookbook, a RackTables installation should exist on
+the client node. If a RackTables installation does not exist,
+installation instructions can be found in the RackTables
+[README](https://github.com/RackTables/racktables/blob/master/README).
 
-* `node['racktables']['db']['user']` - Database user.
-
-* `node['racktables']['db']['host']` - Datbase host.
-
-* `node['racktables']['db']['password']` - Database password. Should be stored
-  in an encrypted databag.
-
-## Usage
 On a client node, add the default recipe to the runlist.
 
 ```javascript
 { "runlist": ["recipe[racktables::default]"] }
 ```
 
-After the node converges, navigate to the installation module URL. With the
-defaults, this is: `http://localhost:8080/?module=installer`
-
-## Testing
+Testing
+-------
 Run `kitchen test`.
 
-## Contributing
+Contributing
+------------
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write you change
@@ -79,7 +64,8 @@ Run `kitchen test`.
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-## License and Authors
+License and Authors
+-------------------
  - Author: Trevor Bramwell (<bramwelt@osuosl.org>)
  - Author: Rudy Grigar (<basic@osuosl.org>)
  - Author: Jordan Evans (<jordane@osuosl.org>)
