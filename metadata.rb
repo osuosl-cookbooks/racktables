@@ -12,4 +12,4 @@ recipe 'racktables::application', 'Configure the RackTables application'
 
 depends 'apache2'
 
-supports         'centos', '~> 6'
+supports         'centos', '~> 6.0'
